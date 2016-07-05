@@ -4,5 +4,9 @@ $things = array('Sgt. Pepper', "11", null, array(1,2,3), 3.14, "12 + 7", false, 
 foreach ($things as $thing) {
 	if (is_scalar($thing)) {
 		echo $thing . PHP_EOL;
+	} elseif (is_array($thing)) {
+		foreach($thing as $other_things) {
+			echo $other_things . PHP_EOL;
+		}
 	}
 }
