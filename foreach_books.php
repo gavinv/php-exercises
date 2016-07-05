@@ -24,8 +24,10 @@ $books = array(
 );
 
 foreach ($books as $title => $book) {
-    echo $title . PHP_EOL;
-    foreach ($book as $key => $value) {
-        echo "      " . $key . ": " . $value . PHP_EOL;
+    if ($book['published'] > 1950) {
+        echo $title . PHP_EOL;
+        foreach ($book as $key => $value) {
+            echo "      " . $key . ": " . $value . PHP_EOL;
+        }
     }
 }
