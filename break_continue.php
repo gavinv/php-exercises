@@ -5,7 +5,7 @@ for ($i = 1; $i <= 100; $i++) {
 		continue;
 	}
 	echo $i . "\n";
-	if ($i == 10) {
+	if ($i >= 10) {
 		break;
 	}
 }
