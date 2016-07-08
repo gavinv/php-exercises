@@ -43,5 +43,12 @@ $companies = [
         'Jean-Louis Gassée'
     ]
 ];
-ksort($companies);
+// foreach($companies as $companyName => $company) {
+    // sort($companies[$companyName]);
+// }
+foreach($companies as &$company) {
+    count($company);
+    sort($company);
+}
+rsort($companies);
 print_r($companies);
