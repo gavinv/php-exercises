@@ -11,5 +11,15 @@ function findArray($array, $value) {
 		return false;
 	}
 }
+function compareArrays($array1, $array2) {
+	$counter = 0;
+	foreach($array1 as $value) {
+		if(findArray($array2, $value)) {
+			$counter += 1;
+		}
+	}
+	return $counter;
+}
 
 echo findArray($names, 'Greg') . PHP_EOL;
+echo compareArrays($names, $compare) . PHP_EOL;
