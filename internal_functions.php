@@ -11,7 +11,7 @@ function inspect($var) {
 			if($var == []) {
 				return "The value is an empty array";
 			} else {
-				return "The value is an array";
+				return "The $vartype is (" . join($var, ', ') . ')';
 			}
 			break;
 		case 'boolean':
@@ -20,6 +20,19 @@ function inspect($var) {
 			} else {
 				return "The value is FALSE";
 			}
+			break;
+		case 'string':
+			if($var == '') {
+				return "The string is empty";
+			} else {
+				return "The string is $var";
+			}
+			break;
+		case 'integer':
+			return "The $vartype is $var";
+			break;
+		case 'double':
+			return "The $vartype is $var";
 			break;
 	}
 }
