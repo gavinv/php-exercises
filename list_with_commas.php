@@ -1,6 +1,6 @@
 <?php
 
-function humanizedList($array, $alphabetize = false) {
+function humanized_list($array, $alphabetize = false) {
 	if($alphabetize) {
 		sort($array);
 	}
@@ -12,5 +12,5 @@ function humanizedList($array, $alphabetize = false) {
 }
 $physicistsString = 'Gordon Freeman, Samantha Carter, Sheldon Cooper, Quinn Mallory, Bruce Banner, Tony Stark';
 $physicistArray = explode(', ', $physicistsString);
-$famousFakePhysicists = humanizedList($physicistArray, true);
+$famousFakePhysicists = humanized_list($physicistArray, true);
 echo "Some of the most famous fictional theoretical physicists are {$famousFakePhysicists}." . PHP_EOL;
