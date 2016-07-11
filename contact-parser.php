@@ -7,10 +7,10 @@ function parse_contacts($filename)
     $contacts = explode("\n", $contents);
 	foreach($contacts as $contact) {
 		$splitContacts = explode("|", $contact);
-		$newArray[] = ['name' => $splitContacts[0], 'number' => $splitContacts[1]];
+		$formatNumbers = substr($splitContacts[1], 0, 3) . '-' . substr($splitContacts[1], 3, 3) . '-' . substr($splitContacts[1], 6, 4);
+		$newArray[] = ['name' => $splitContacts[0], 'number' => $formatNumbers];
 	}
 	$contacts = $newArray;
     return $contacts;
 }
-
 var_dump(parse_contacts('contacts.txt'));
