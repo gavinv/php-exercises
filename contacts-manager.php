@@ -38,6 +38,12 @@ function formatContact($array) {
 	}
 	echo "\n";
 }
+function addContact($name, $number) {
+	$fileName = ('contacts.txt');
+	$handle = fopen($fileName, 'a');
+	fwrite($handle, $name . '|' . $number . "\n");
+	fclose($handle);
+}
 do {
 	fwrite(STDOUT, '- CONTACTS MANAGER -' . PHP_EOL);
 	fwrite(STDOUT, "1. View contacts\n2. Add a new contact\n3. Search a contact by name\n4. Delete an existing contact\n5. Exit\nPlease enter an option from above (1, 2, 3, 4 or 5):");
@@ -47,6 +53,12 @@ do {
 			formatContact($contacts);
 			break;
 		case 2:
+			echo 'Contact name: ';
+			$name = trim(fgets(STDIN));
+			echo 'Phone number: ';
+			$number = trim(fgets(STDIN));
+			addContact($name, $number);
+			$contacts = parseContacts('contacts.txt');
 			break;
 		case 3:
             echo 'Please enter a name: ';
@@ -54,5 +66,7 @@ do {
 			$searchedContact = (searchByName($contacts, $name));
 			formatContact($searchedContact);
 			break;
+		case 4:
+			
 		}
 } while ($selection != '5');
