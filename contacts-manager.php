@@ -14,15 +14,13 @@ function parseContacts($filename)
 }
 $contacts = parseContacts('contacts.txt');
 function searchByName($array, $name) {
-    $filtered = [];
 	foreach ($array as $contact) {
         if (strpos($contact['name'], $name) !== false) {
             $filtered[] = $contact;
         }
 	}
-return $filtered;
+	return $filtered;
 }
-var_dump($contacts);
 function formatContact($array) {
 	echo "\n";
 	echo str_pad('Name', 12, " ", STR_PAD_RIGHT);
@@ -44,9 +42,22 @@ function addContact($name, $number) {
 	fwrite($handle, $name . '|' . $number . "\n");
 	fclose($handle);
 }
+function deleteContact(&$array, $name) {
+	foreach ($array as $index => $contact) {
+        if (strpos($contact['name'], $name) !== false) {
+            unset($array[$index]);
+            continue;
+        }
+        $contact['number'] = str_replace('-', '', $contact['number']);
+    	$array[$index] = implode('|', $contact);
+	}
+	$array = implode("\n", $array);
+	$replaceContent = file_put_contents('contacts.txt', $array . PHP_EOL);
+}
+
 do {
-	fwrite(STDOUT, '- CONTACTS MANAGER -' . PHP_EOL);
-	fwrite(STDOUT, "1. View contacts\n2. Add a new contact\n3. Search a contact by name\n4. Delete an existing contact\n5. Exit\nPlease enter an option from above (1, 2, 3, 4 or 5):");
+	fwrite(STDOUT, '--\ CONTACTS MANAGER /--' . PHP_EOL);
+	fwrite(STDOUT, "1. View contacts\n2. Add a new contact\n3. Search a contact by name\n4. Delete an existing contact\n5. Exit\nPlease enter an option from above (1, 2, 3, 4 or 5): ");
 	$selection = trim(fgets(STDIN));
 	switch ($selection) {
 		case 1:
@@ -67,6 +78,15 @@ do {
 			formatContact($searchedContact);
 			break;
 		case 4:
-			
+			echo 'Enter name of contact you wish to delete: ';
+			$name = trim(fgets(STDIN));
+			$searchedContact = searchByName($contacts, $name);
+			echo "Are you sure you want to delete contact " . $searchedContact[0]['name'] . "? (Y / N): ";
+			if(trim(fgets(STDIN)) === 'y' || trim(fgets(STDIN)) === 'Y') {
+				deleteContact($contacts, $name);
+				echo "Successfully deleted " . $searchedContact[0]['name'] . PHP_EOL;
+			} //will need to have this return to menu if anything else.
+			$contacts = parseContacts('contacts.txt');
+			break;
 		}
 } while ($selection != '5');
