@@ -21,7 +21,7 @@ function compare_arrays($array1, $array2) {
 	return $counter;
 }
 function combine_arrays($array1, $array2) {
-
+	
 }
 
 var_dump(search_array($names, 'Greg')) . PHP_EOL;
