@@ -1,15 +1,17 @@
 <?php
 class Log 
 {
-	public $fileName;
+	public $filename;
+	public $handle;
+	public function __construct($prefix = 'log') 
+	{
+		$this->filename = $prefix . '-' . date('Y-m-d') . '.log';
+		$this->handle = fopen($this->filename, 'a');
+	}
 	public function logMessage($logLevel, $message) 
 	{
-		$date = date('Y-m-d');
 		$time = date('Y-m-d H:i:s');
-		$this->fileName = 'log-' . $date . '.log';
-		$handle = fopen($this->fileName, 'a');
-		fwrite($handle, $time . " [$logLevel] $message" . PHP_EOL);
-		fclose($handle);
+		fwrite($this->handle, $time . " [$logLevel] $message" . PHP_EOL);
 	}
 	public function info($message)
 	{
@@ -18,5 +20,9 @@ class Log
 	public function error($message) 
 	{
 		$this->logMessage('ERROR', $message);
+	}
+	public function __destruct() 
+	{
+		fclose($this->handle);
 	}
 }
