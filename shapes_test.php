@@ -9,6 +9,6 @@ echo $rectangleOne->area() . PHP_EOL;
 echo $rectangleTwo->area() . PHP_EOL;
 echo $rectangleThree->area() . PHP_EOL;
 
-$squareOne = new Square(5, 5);
+$squareOne = new Square(5);
 echo $squareOne->perimeter() . PHP_EOL;
 echo $squareOne->area() . PHP_EOL;
