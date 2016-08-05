@@ -3,6 +3,8 @@
 class Model {
 
 	private $attributes = [];
+	protected static $table;
+
 	public function __set($key, $value)
     {
         $this->attributes[$key] = $value;
@@ -14,6 +16,10 @@ class Model {
         }
 
         return null;
+    }
+    public static function getTableName() 
+    {
+        return static::$table;
     }
 }
 
